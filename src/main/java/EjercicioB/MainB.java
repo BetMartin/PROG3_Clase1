@@ -1,9 +1,9 @@
 package EjercicioB;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Scanner;
 
 public class MainB {
     public static void main(String[] args) {
@@ -48,20 +48,18 @@ public class MainB {
 
         //PREGUNTO MES Y AÑO QUE QUIERAN CONSULTAR
 
-        String month=JOptionPane.showInputDialog("Ingrese mes de la consulta");
-        int mes=Integer.parseInt(month);
+        Scanner scanner = new Scanner(System.in);
 
-        String year= JOptionPane.showInputDialog("Ingrese año de la consulta");
-        int anio=Integer.parseInt(year);
+        System.out.print("Ingrese mes de la consulta: ");
+        int mes = scanner.nextInt();
 
-        //LLAMO AL PRIMER METODO QUE ME DEVUELVE TODOS LAS ASISTENCIAS DEL MES REQUERIDO
+        System.out.print("Ingrese año de la consulta: ");
+        int anio = scanner.nextInt();
 
-        ArrayList<Asistencia> consultaAsistencias=new ArrayList<>();
-        ArrayList<Tardanza> consultaTardanzas=new ArrayList<>();
+        // LLAMO AL PRIMER METODO QUE ME DEVUELVE TODOS LAS ASISTENCIAS DEL MES REQUERIDO
 
-        consultaAsistencias=empleado1.getAsistenciaXMesXAnio(mes,anio);
-
-        consultaTardanzas=empleado1.getDiasConTardanza(mes,anio);
+        ArrayList<Asistencia> consultaAsistencias = empleado1.getAsistenciaXMesXAnio(mes, anio);
+        ArrayList<Tardanza> consultaTardanzas = empleado1.getDiasConTardanza(mes, anio);
 
         // MUESTRO EL CONTENIDO DE LOS ArrayList EN LA CONSOLA
 
@@ -75,5 +73,6 @@ public class MainB {
             System.out.println("Fecha: " + tardanza.getFecha() + ", Hora: " + tardanza.getHora() + ":" + tardanza.getMinuto() + ", Tipo: " + tardanza.getTipo());
         }
 
+        scanner.close();
     }
 }
