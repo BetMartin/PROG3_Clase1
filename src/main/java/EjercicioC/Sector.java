@@ -1,5 +1,7 @@
 package EjercicioC;
 
+import EjercicioA.Expediente;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,21 +9,17 @@ public class Sector {
     private int numero;
     private String denominacion;
     private String tipo;
+    private ArrayList<Persona> personas = new ArrayList<>();
+    private ArrayList<Sector> subsectores = new ArrayList<>();
 
-    ArrayList<Persona> personas = new ArrayList<Persona>();
-
-    ArrayList<Sector> sectores = new ArrayList<Sector>();
-
-    public Sector(int numero, String denominacion, String tipo, ArrayList<Persona> personas) {
+    // Constructor
+    public Sector(int numero, String denominacion, String tipo) {
         this.numero = numero;
         this.denominacion = denominacion;
         this.tipo = tipo;
-        this.personas = personas;
     }
 
-    public Sector() {
-    }
-
+    // Getters y setters
     public int getNumero() {
         return numero;
     }
@@ -54,31 +52,42 @@ public class Sector {
         this.personas = personas;
     }
 
-    public ArrayList<Sector> getSectores() {
-        return sectores;
+    public ArrayList<Sector> getSubsectores() {
+        return subsectores;
     }
 
-    public void setSectores(ArrayList<Sector> sectores) {
-        this.sectores = sectores;
+    public void setSubsectores(ArrayList<Sector> subsectores) {
+        this.subsectores = subsectores;
     }
 
-    public void AgregarSector(Sector sector) {
-        this.sectores.add(sector);
+    // Método para agregar personas al sector
+    public void agregarPersona(Persona persona) {
+        personas.add(persona);
+    }
+
+    // Método para agregar subsectores al sector
+    public void agregarSubsector(Sector subsector) {
+        subsectores.add(subsector);
     }
 
     // Método recursivo para obtener todos los subsectores
-    public List<Sector> obtenerTotalSubsectores() {
-        List<Sector> totalSubsectores = new ArrayList<>();
-
-        // Recorre todos los subsectores directos de este sector
-        for (Sector subsector : this.sectores) {
-            // Agrega el subsector actual a la lista
-            totalSubsectores.add(subsector);
-
-            // Llama recursivamente al método para obtener los sub-subsectores
-            totalSubsectores.addAll(subsector.obtenerTotalSubsectores());
+    public ArrayList<Sector> obtenerTodosLosSubsectores() {
+        ArrayList<Sector> totalSubsectores = new ArrayList<>(subsectores);
+        for (Sector subsector : subsectores) {
+            totalSubsectores.addAll(subsector.obtenerTodosLosSubsectores());
         }
-
         return totalSubsectores;
+    }
+
+    // Nuevo método para devolver los datos de los subsectores
+    public ArrayList<String> obtenerDatosSubsectores() {
+        ArrayList<String> datosSubsectores = new ArrayList<>();
+        for (Sector subsector : subsectores) {
+            String datos = "Número: " + subsector.getNumero() + ", Denominación: " + subsector.getDenominacion() + ", Tipo: " + subsector.getTipo();
+            datosSubsectores.add(datos);
+            // Llamada recursiva para obtener los datos de los sub-subsectores
+            datosSubsectores.addAll(subsector.obtenerDatosSubsectores());
+        }
+        return datosSubsectores;
     }
 }

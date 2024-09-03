@@ -87,42 +87,42 @@ public class Persona {
         this.actividades.add(actividad);
     }
 
-    public Actividad obtenerActividad(int actividad) {
-        return this.actividades.get(actividad);
+    public Persona(ArrayList<Actividad> actividades) {
+        this.actividades = actividades;
     }
 
-    //C1
+    // C.1 - Total de puntos asignados en todas las actividades
     public double totalPuntosAsignados() {
-        double total = 0;
-        for (Actividad actividad : this.actividades) {
-            total += actividad.getTipoActividad().getPuntosAsignados();
+        double totalPuntos = 0.0;
+        for (Actividad actividad : actividades) {
+            totalPuntos += actividad.getPuntos();
         }
-        return total;
+        return totalPuntos;
     }
 
-    //C2
-    public double totalPuntosAsignados(int codigo){
-        double total = 0;
-        for (Actividad actividad : this.actividades) {
-            if(actividad.getTipoActividad().getCodigo() == codigo){
-                total += actividad.getTipoActividad().getPuntosAsignados();
+    // C.2 - Total de puntos asignados en actividades de un tipo específico
+    public double totalPuntosAsignados(int codigo) {
+        double totalPuntos = 0.0;
+        for (Actividad actividad : actividades) {
+            if (actividad.getTipoActividad().getCodigo() == codigo) {
+                totalPuntos += actividad.getPuntos();
             }
         }
-        return total;
+        return totalPuntos;
     }
 
-    //C3
+    // C.3 - Total de puntos asignados en actividades de un tipo específico en un año específico
     public double totalPuntosAsignados(int codigo, int anio) {
-        double total = 0;
-        for (Actividad actividad : this.actividades) {
-            if(actividad.getTipoActividad().getCodigo() == codigo && actividad.getFechaInicio().getYear()+2000 >= anio || actividad.getFechaFin().getYear()+2000 <= anio ){
-                total += actividad.getTipoActividad().getPuntosAsignados();
+        double totalPuntos = 0.0;
+        for (Actividad actividad : actividades) {
+            if (actividad.getTipoActividad().getCodigo() == codigo &&
+                    actividad.getFechaInicio().getYear() + 1900 == anio) {
+                totalPuntos += actividad.getPuntos();
             }
         }
-        return total;
+        return totalPuntos;
     }
 
-    //C4
 
 }
 

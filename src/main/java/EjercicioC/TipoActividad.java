@@ -11,23 +11,12 @@ public class TipoActividad {
         this.puntosAsignados = puntosAsignados;
     }
 
-    public TipoActividad() {
-    }
-
     public int getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
     public String getDenominacion() {
         return denominacion;
-    }
-
-    public void setDenominacion(String denominacion) {
-        this.denominacion = denominacion;
     }
 
     public double getPuntosAsignados() {
